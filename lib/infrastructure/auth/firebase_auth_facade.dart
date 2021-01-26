@@ -51,10 +51,21 @@ class FirebaseAuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword(
-      {String emailAddress, String password}) {
-    // TODO: implement signInWithEmailAndPassword
-    throw UnimplementedError();
+  Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword({
+    @required String emailAddress,
+    @required String password,
+  }) async {
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(email: emailAddress, password: password);
+      return right(unit);
+    } on FirebaseAuthException catch (e) {
+      // look at quick documentations on .signInWithEmailAndPassword to see the different error codes
+      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+        return left(const AuthFailure.invalidEmailAndPasswordCombination());
+      } else {
+        return left(const AuthFailure.serverError());
+      }
+    }
   }
 
   @override
