@@ -22,7 +22,8 @@ class FirebaseAuthFacade implements IAuthFacade {
   Future<Option<UniqueUser>> getSignedInUser() async => optionOf(UniqueUser(
       id: _firebaseAuth.currentUser.uid,
       displayName: _firebaseAuth.currentUser.displayName,
-      email: _firebaseAuth.currentUser.email));
+      email: _firebaseAuth.currentUser.email,
+      profilePic: _firebaseAuth.currentUser.photoURL ?? 'No Profile pic'));
 
   @override
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
