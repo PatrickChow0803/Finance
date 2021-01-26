@@ -17,13 +17,13 @@ class _$UniqueUserTearOff {
   _UniqueUser call(
       {@required String id,
       String profilePic,
-      @required String firstName,
-      @required String lastName}) {
+      @required String displayName,
+      @required String email}) {
     return _UniqueUser(
       id: id,
       profilePic: profilePic,
-      firstName: firstName,
-      lastName: lastName,
+      displayName: displayName,
+      email: email,
     );
   }
 }
@@ -36,8 +36,8 @@ const $UniqueUser = _$UniqueUserTearOff();
 mixin _$UniqueUser {
   String get id;
   String get profilePic;
-  String get firstName;
-  String get lastName;
+  String get displayName;
+  String get email;
 
   @JsonKey(ignore: true)
   $UniqueUserCopyWith<UniqueUser> get copyWith;
@@ -48,7 +48,7 @@ abstract class $UniqueUserCopyWith<$Res> {
   factory $UniqueUserCopyWith(
           UniqueUser value, $Res Function(UniqueUser) then) =
       _$UniqueUserCopyWithImpl<$Res>;
-  $Res call({String id, String profilePic, String firstName, String lastName});
+  $Res call({String id, String profilePic, String displayName, String email});
 }
 
 /// @nodoc
@@ -63,15 +63,16 @@ class _$UniqueUserCopyWithImpl<$Res> implements $UniqueUserCopyWith<$Res> {
   $Res call({
     Object id = freezed,
     Object profilePic = freezed,
-    Object firstName = freezed,
-    Object lastName = freezed,
+    Object displayName = freezed,
+    Object email = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as String,
       profilePic:
           profilePic == freezed ? _value.profilePic : profilePic as String,
-      firstName: firstName == freezed ? _value.firstName : firstName as String,
-      lastName: lastName == freezed ? _value.lastName : lastName as String,
+      displayName:
+          displayName == freezed ? _value.displayName : displayName as String,
+      email: email == freezed ? _value.email : email as String,
     ));
   }
 }
@@ -82,7 +83,7 @@ abstract class _$UniqueUserCopyWith<$Res> implements $UniqueUserCopyWith<$Res> {
           _UniqueUser value, $Res Function(_UniqueUser) then) =
       __$UniqueUserCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String profilePic, String firstName, String lastName});
+  $Res call({String id, String profilePic, String displayName, String email});
 }
 
 /// @nodoc
@@ -99,15 +100,16 @@ class __$UniqueUserCopyWithImpl<$Res> extends _$UniqueUserCopyWithImpl<$Res>
   $Res call({
     Object id = freezed,
     Object profilePic = freezed,
-    Object firstName = freezed,
-    Object lastName = freezed,
+    Object displayName = freezed,
+    Object email = freezed,
   }) {
     return _then(_UniqueUser(
       id: id == freezed ? _value.id : id as String,
       profilePic:
           profilePic == freezed ? _value.profilePic : profilePic as String,
-      firstName: firstName == freezed ? _value.firstName : firstName as String,
-      lastName: lastName == freezed ? _value.lastName : lastName as String,
+      displayName:
+          displayName == freezed ? _value.displayName : displayName as String,
+      email: email == freezed ? _value.email : email as String,
     ));
   }
 }
@@ -117,24 +119,24 @@ class _$_UniqueUser implements _UniqueUser {
   const _$_UniqueUser(
       {@required this.id,
       this.profilePic,
-      @required this.firstName,
-      @required this.lastName})
+      @required this.displayName,
+      @required this.email})
       : assert(id != null),
-        assert(firstName != null),
-        assert(lastName != null);
+        assert(displayName != null),
+        assert(email != null);
 
   @override
   final String id;
   @override
   final String profilePic;
   @override
-  final String firstName;
+  final String displayName;
   @override
-  final String lastName;
+  final String email;
 
   @override
   String toString() {
-    return 'UniqueUser(id: $id, profilePic: $profilePic, firstName: $firstName, lastName: $lastName)';
+    return 'UniqueUser(id: $id, profilePic: $profilePic, displayName: $displayName, email: $email)';
   }
 
   @override
@@ -146,12 +148,11 @@ class _$_UniqueUser implements _UniqueUser {
             (identical(other.profilePic, profilePic) ||
                 const DeepCollectionEquality()
                     .equals(other.profilePic, profilePic)) &&
-            (identical(other.firstName, firstName) ||
+            (identical(other.displayName, displayName) ||
                 const DeepCollectionEquality()
-                    .equals(other.firstName, firstName)) &&
-            (identical(other.lastName, lastName) ||
-                const DeepCollectionEquality()
-                    .equals(other.lastName, lastName)));
+                    .equals(other.displayName, displayName)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)));
   }
 
   @override
@@ -159,8 +160,8 @@ class _$_UniqueUser implements _UniqueUser {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(profilePic) ^
-      const DeepCollectionEquality().hash(firstName) ^
-      const DeepCollectionEquality().hash(lastName);
+      const DeepCollectionEquality().hash(displayName) ^
+      const DeepCollectionEquality().hash(email);
 
   @JsonKey(ignore: true)
   @override
@@ -172,17 +173,17 @@ abstract class _UniqueUser implements UniqueUser {
   const factory _UniqueUser(
       {@required String id,
       String profilePic,
-      @required String firstName,
-      @required String lastName}) = _$_UniqueUser;
+      @required String displayName,
+      @required String email}) = _$_UniqueUser;
 
   @override
   String get id;
   @override
   String get profilePic;
   @override
-  String get firstName;
+  String get displayName;
   @override
-  String get lastName;
+  String get email;
   @override
   @JsonKey(ignore: true)
   _$UniqueUserCopyWith<_UniqueUser> get copyWith;
