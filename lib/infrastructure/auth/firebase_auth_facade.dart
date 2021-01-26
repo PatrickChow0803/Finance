@@ -5,6 +5,7 @@ import 'package:finance/domain/auth/auth_failure.dart';
 import 'package:finance/domain/auth/i_auth_facade.dart';
 import 'package:finance/domain/auth/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
@@ -26,10 +27,21 @@ class FirebaseAuthFacade implements IAuthFacade {
       profilePic: _firebaseAuth.currentUser.photoURL ?? 'No Profile pic'));
 
   @override
-  Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword(
-      {String emailAddress, String password}) {
-    // TODO: implement registerWithEmailAndPassword
-    throw UnimplementedError();
+  Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
+    @required String emailAddress,
+    @required String password,
+  }) async {
+    try {
+      await _firebaseAuth.createUserWithEmailAndPassword(email: emailAddress, password: password);
+      return right(unit);
+    } on FirebaseAuthException catch (e) {
+      // look at quick documentations on .createUserWithEmailAndPassword to see the different error codes
+      if (e.code == 'email-already-in-use') {
+        return left(const AuthFailure.emailAlreadyInUse());
+      } else {
+        return left(const AuthFailure.serverError());
+      }
+    }
   }
 
   @override
