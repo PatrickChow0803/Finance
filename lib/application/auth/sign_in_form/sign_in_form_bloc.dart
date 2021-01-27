@@ -60,9 +60,20 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
           _authFacade.signInWithEmailAndPassword,
         );
       },
+      signInWithGooglePressed: (e) async* {
+        yield state.copyWith(
+          isSubmitting: true,
+          authFailureOrSuccessOption: none(),
+        );
+        final failureOrSuccess = await _authFacade.signInWithGoogle();
+        yield state.copyWith(
+            isSubmitting: false, authFailureOrSuccessOption: some(failureOrSuccess));
+      },
     );
   }
 
+  // method used for registering and sign_in
+  // Used to help reduce the amount of code needed
   Stream<SignInFormState> _performActionOnAuthFacadeWithEmailAndPassword(
     Future<Either<AuthFailure, Unit>> Function({
       @required String emailAddress,
