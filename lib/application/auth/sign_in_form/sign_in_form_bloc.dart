@@ -50,6 +50,45 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
           authFailureOrSuccessOption: none(),
         );
       },
+      registerWithEmailAndPasswordPressed: (e) async* {
+        yield* _performActionOnAuthFacadeWithEmailAndPassword(
+          _authFacade.registerWithEmailAndPassword,
+        );
+      },
+      signInWithEmailAndPasswordPressed: (e) async* {
+        yield* _performActionOnAuthFacadeWithEmailAndPassword(
+          _authFacade.signInWithEmailAndPassword,
+        );
+      },
+    );
+  }
+
+  Stream<SignInFormState> _performActionOnAuthFacadeWithEmailAndPassword(
+    Future<Either<AuthFailure, Unit>> Function({
+      @required String emailAddress,
+      @required String password,
+    }) // the function that was passed in
+        forwardedCall,
+  ) async* {
+    Either<AuthFailure, Unit> failureOrSuccess;
+
+    // before doing the future method
+    yield state.copyWith(
+      // show the loading spinner
+      isSubmitting: true,
+      authFailureOrSuccessOption: none(),
+    );
+
+    failureOrSuccess = await forwardedCall(
+      emailAddress: state.emailAddress,
+      password: state.password,
+    );
+
+    // after finishing the future method
+    yield state.copyWith(
+      isSubmitting: false,
+      showErrorMessages: true,
+      authFailureOrSuccessOption: optionOf(failureOrSuccess),
     );
   }
 }
