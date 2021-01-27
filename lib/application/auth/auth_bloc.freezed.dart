@@ -10,6 +10,245 @@ part of 'auth_bloc.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
+class _$AuthEventTearOff {
+  const _$AuthEventTearOff();
+
+// ignore: unused_element
+  AuthCheckRequested authCheckRequested() {
+    return const AuthCheckRequested();
+  }
+
+// ignore: unused_element
+  SignedOut signedOut() {
+    return const SignedOut();
+  }
+}
+
+/// @nodoc
+// ignore: unused_element
+const $AuthEvent = _$AuthEventTearOff();
+
+/// @nodoc
+mixin _$AuthEvent {
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult authCheckRequested(),
+    @required TResult signedOut(),
+  });
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult authCheckRequested(),
+    TResult signedOut(),
+    @required TResult orElse(),
+  });
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult authCheckRequested(AuthCheckRequested value),
+    @required TResult signedOut(SignedOut value),
+  });
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult authCheckRequested(AuthCheckRequested value),
+    TResult signedOut(SignedOut value),
+    @required TResult orElse(),
+  });
+}
+
+/// @nodoc
+abstract class $AuthEventCopyWith<$Res> {
+  factory $AuthEventCopyWith(AuthEvent value, $Res Function(AuthEvent) then) =
+      _$AuthEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$AuthEventCopyWithImpl<$Res> implements $AuthEventCopyWith<$Res> {
+  _$AuthEventCopyWithImpl(this._value, this._then);
+
+  final AuthEvent _value;
+  // ignore: unused_field
+  final $Res Function(AuthEvent) _then;
+}
+
+/// @nodoc
+abstract class $AuthCheckRequestedCopyWith<$Res> {
+  factory $AuthCheckRequestedCopyWith(
+          AuthCheckRequested value, $Res Function(AuthCheckRequested) then) =
+      _$AuthCheckRequestedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$AuthCheckRequestedCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res>
+    implements $AuthCheckRequestedCopyWith<$Res> {
+  _$AuthCheckRequestedCopyWithImpl(
+      AuthCheckRequested _value, $Res Function(AuthCheckRequested) _then)
+      : super(_value, (v) => _then(v as AuthCheckRequested));
+
+  @override
+  AuthCheckRequested get _value => super._value as AuthCheckRequested;
+}
+
+/// @nodoc
+class _$AuthCheckRequested implements AuthCheckRequested {
+  const _$AuthCheckRequested();
+
+  @override
+  String toString() {
+    return 'AuthEvent.authCheckRequested()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is AuthCheckRequested);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult authCheckRequested(),
+    @required TResult signedOut(),
+  }) {
+    assert(authCheckRequested != null);
+    assert(signedOut != null);
+    return authCheckRequested();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult authCheckRequested(),
+    TResult signedOut(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (authCheckRequested != null) {
+      return authCheckRequested();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult authCheckRequested(AuthCheckRequested value),
+    @required TResult signedOut(SignedOut value),
+  }) {
+    assert(authCheckRequested != null);
+    assert(signedOut != null);
+    return authCheckRequested(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult authCheckRequested(AuthCheckRequested value),
+    TResult signedOut(SignedOut value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (authCheckRequested != null) {
+      return authCheckRequested(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AuthCheckRequested implements AuthEvent {
+  const factory AuthCheckRequested() = _$AuthCheckRequested;
+}
+
+/// @nodoc
+abstract class $SignedOutCopyWith<$Res> {
+  factory $SignedOutCopyWith(SignedOut value, $Res Function(SignedOut) then) =
+      _$SignedOutCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$SignedOutCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
+    implements $SignedOutCopyWith<$Res> {
+  _$SignedOutCopyWithImpl(SignedOut _value, $Res Function(SignedOut) _then)
+      : super(_value, (v) => _then(v as SignedOut));
+
+  @override
+  SignedOut get _value => super._value as SignedOut;
+}
+
+/// @nodoc
+class _$SignedOut implements SignedOut {
+  const _$SignedOut();
+
+  @override
+  String toString() {
+    return 'AuthEvent.signedOut()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is SignedOut);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult authCheckRequested(),
+    @required TResult signedOut(),
+  }) {
+    assert(authCheckRequested != null);
+    assert(signedOut != null);
+    return signedOut();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult authCheckRequested(),
+    TResult signedOut(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (signedOut != null) {
+      return signedOut();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult authCheckRequested(AuthCheckRequested value),
+    @required TResult signedOut(SignedOut value),
+  }) {
+    assert(authCheckRequested != null);
+    assert(signedOut != null);
+    return signedOut(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult authCheckRequested(AuthCheckRequested value),
+    TResult signedOut(SignedOut value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (signedOut != null) {
+      return signedOut(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SignedOut implements AuthEvent {
+  const factory SignedOut() = _$SignedOut;
+}
+
+/// @nodoc
 class _$AuthStateTearOff {
   const _$AuthStateTearOff();
 
