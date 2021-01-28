@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:finance/application/auth/auth_bloc.dart';
 import 'package:finance/application/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:finance/domain/auth/value_validators.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,19 +50,23 @@ class SignInForm extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: TextFormField(
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.email,
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.email,
+                      ),
+                      labelText: "Email",
                     ),
-                    labelText: "Email",
-                  ),
-                  autocorrect: false,
-                  onChanged: (value) {
-                    // the value will be validated inside of the value object
-                    context.read<SignInFormBloc>().add(SignInFormEvent.emailChanged(value));
-                  },
-                  // validator: (_) => context.read<SignInFormBloc>().state.emailAddress
-                ),
+                    autocorrect: false,
+                    onChanged: (value) {
+                      // the value will be validated inside of the value object
+                      context.read<SignInFormBloc>().add(SignInFormEvent.emailChanged(value));
+                    },
+                    validator: (input) {
+                      if (!validateEmailAddress(input)) {
+                        return "Invalid Email Address Format";
+                      }
+                      return '';
+                    }),
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -78,12 +83,12 @@ class SignInForm extends StatelessWidget {
                     // the value will be validated inside of the value object
                     context.read<SignInFormBloc>().add(SignInFormEvent.passwordChanged(value));
                   },
-                  // validator: (_) => context.read<SignInFormBloc>().state.password.value.fold(
-                  //         (f) => f.maybeMap(
-                  //       shortPassword: (_) => "Invalid password",
-                  //       orElse: () => null,
-                  //     ),
-                  //         (_) => null),
+                  validator: (input) {
+                    if (!validatePassword(input)) {
+                      return "Password must be longer than 6 characters";
+                    }
+                    return '';
+                  },
                 ),
               ),
               Padding(
