@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+import 'package:finance/infrastructure/auth/firebase_user_mapper.dart';
 
 @LazySingleton(as: IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
@@ -20,11 +21,8 @@ class FirebaseAuthFacade implements IAuthFacade {
   // optionOf makes it a type of Option
   // I should remove the Future here but then I'll have to edit the interface
   @override
-  Future<Option<UniqueUser>> getSignedInUser() async => optionOf(UniqueUser(
-      id: _firebaseAuth.currentUser.uid,
-      displayName: _firebaseAuth.currentUser.displayName,
-      email: _firebaseAuth.currentUser.email,
-      profilePic: _firebaseAuth.currentUser.photoURL ?? 'No Profile pic'));
+  Future<Option<UniqueUser>> getSignedInUser() async =>
+      optionOf(_firebaseAuth.currentUser?.toDomain());
 
   @override
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
