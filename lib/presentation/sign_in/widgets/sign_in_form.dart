@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:finance/application/auth/auth_bloc.dart';
 import 'package:finance/application/auth/sign_in_form/sign_in_form_bloc.dart';
 import 'package:finance/domain/auth/value_validators.dart';
+import 'package:finance/presentation/routes/router.gr.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +30,8 @@ class SignInForm extends StatelessWidget {
           },
               // if the user signed in successfully, move to home screen
               (_) {
-            // past: ExtendedNavigator.of(context).replace(Routes.notesOverviewPage);
+            past:
+            ExtendedNavigator.of(context).replace(Routes.homePage);
             // change the auth state of our app
             context.read<AuthBloc>().add(const AuthEvent.authCheckRequested());
           }),
