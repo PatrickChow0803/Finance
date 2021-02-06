@@ -22,7 +22,7 @@ abstract class Receipt implements _$Receipt {
     @required DateTime date,
   }) = _Receipt;
 
-  // this is the default empty note when a new note is opened
+  // this is the default receipt when a new receipt is opened
   factory Receipt.empty() => Receipt(
         id: Uuid().v1(),
         category: Category.other,
