@@ -20,6 +20,7 @@ abstract class Receipt implements _$Receipt {
     @required Category category,
     @required double price,
     @required DateTime date,
+    @required bool isFavorite,
   }) = _Receipt;
 
   // this is the default receipt when a new receipt is opened
@@ -28,5 +29,6 @@ abstract class Receipt implements _$Receipt {
         category: Category.other,
         price: 0.0,
         date: DateTime.now(),
+        isFavorite: false,
       );
 }

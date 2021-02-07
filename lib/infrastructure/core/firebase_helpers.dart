@@ -18,5 +18,5 @@ extension FirestoreX on FirebaseFirestore {
 
 extension DocumentReferenceX on DocumentReference {
   // this is the same as just doing users('usersId').collection('receipts')
-  CollectionReference get noteCollection => collection('receipts');
+  CollectionReference get receiptCollection => collection('receipts');
 }
