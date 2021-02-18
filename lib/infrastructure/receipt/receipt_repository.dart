@@ -72,9 +72,23 @@ class ReceiptRepository implements IReceiptRepository {
   }
 
   @override
-  Future<Either<ReceiptFailure, Unit>> delete(Receipt receipt) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<Either<ReceiptFailure, Unit>> delete(Receipt receipt) async {
+    try {
+      final userDoc = await _firestore.userDocument();
+
+      await userDoc.receiptCollection.doc(receipt.id).delete();
+
+      // if nothing went wrong, return right(unit)
+      return right(unit);
+    } on FirebaseException catch (e) {
+      if (e.message.contains('PERMISSION_DENIED')) {
+        return left(const ReceiptFailure.insufficientPermission());
+      } else if (e.message.contains('NOT_FOUND')) {
+        return left(const ReceiptFailure.unableToUpdate());
+      } else {
+        return left(const ReceiptFailure.unexpected());
+      }
+    }
   }
 
   @override
