@@ -17,7 +17,7 @@ abstract class IReceiptRepository {
 
   // When creating a receipts, you can either fail when creating it
   // or you can successfully create the receipts but nothing needs to be returned
-  Future<Either<ReceiptFailure, Unit>> create(Receipt note);
-  Future<Either<ReceiptFailure, Unit>> update(Receipt note);
-  Future<Either<ReceiptFailure, Unit>> delete(Receipt note);
+  Future<Either<ReceiptFailure, Unit>> create(Receipt receipt);
+  Future<Either<ReceiptFailure, Unit>> update(Receipt receipt);
+  Future<Either<ReceiptFailure, Unit>> delete(Receipt receipt);
 }
