@@ -17,6 +17,6 @@ extension FirestoreX on FirebaseFirestore {
 }
 
 extension DocumentReferenceX on DocumentReference {
-  // this is the same as just doing users('usersId').collection('receipts')
+  // this is the same as just doing collection/{receipts}
   CollectionReference get receiptCollection => collection('receipts');
 }

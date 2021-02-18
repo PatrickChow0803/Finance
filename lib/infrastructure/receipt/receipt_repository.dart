@@ -34,26 +34,51 @@ class ReceiptRepository implements IReceiptRepository {
             .toList()));
   }
 
+  // display only favorited receipts
   @override
-  Stream<Either<ReceiptFailure, List<Receipt>>> watchFavorite() {
-    // TODO: implement watchFavorite
-    throw UnimplementedError();
+  Stream<Either<ReceiptFailure, List<Receipt>>> watchFavorite() async* {
+    // final userDoc = await _firestore.userDocument();
+    // yield* userDoc.receiptCollection.orderBy('serverTimeStamp', descending: true).snapshots().map(
+    //       (snapshot) => right<ReceiptFailure, List<Receipt>>(
+    //         snapshot.docs.map((receipts) => ,
+    //       ),
+    //     );
   }
 
   @override
-  Future<Either<ReceiptFailure, Unit>> create(Receipt note) {
-    // TODO: implement create
-    throw UnimplementedError();
+  Future<Either<ReceiptFailure, Unit>> create(Receipt receipt) async {
+    try {
+      final userDoc = await _firestore.userDocument();
+
+      // use .set instead of .add here because if we were to use .add,
+      // Firebase would automatically generate an ID for the document.
+      // But we're already generating an ID in the app, so therefore use the .set property
+      // if no document exists, firebase creates the new document automatically.
+      // if the document does exists, just update the values
+      // since .set is an async operation, use await here
+      await userDoc.receiptCollection
+          .doc(receipt.id)
+          .set({'price': receipt.price, 'date': receipt.date});
+
+      // if nothing went wrong, return right(unit)
+      return right(unit);
+    } on FirebaseException catch (e) {
+      if (e.message.contains('PERMISSION_DENIED')) {
+        return left(const ReceiptFailure.insufficientPermission());
+      } else {
+        return left(const ReceiptFailure.unexpected());
+      }
+    }
   }
 
   @override
-  Future<Either<ReceiptFailure, Unit>> delete(Receipt note) {
+  Future<Either<ReceiptFailure, Unit>> delete(Receipt receipt) {
     // TODO: implement delete
     throw UnimplementedError();
   }
 
   @override
-  Future<Either<ReceiptFailure, Unit>> update(Receipt note) {
+  Future<Either<ReceiptFailure, Unit>> update(Receipt receipt) {
     // TODO: implement update
     throw UnimplementedError();
   }

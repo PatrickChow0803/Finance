@@ -18,12 +18,14 @@ class _$ReceiptTearOff {
       {@required String id,
       @required Category category,
       @required double price,
-      @required DateTime date}) {
+      @required DateTime date,
+      @required bool isFavorite}) {
     return _Receipt(
       id: id,
       category: category,
       price: price,
       date: date,
+      isFavorite: isFavorite,
     );
   }
 }
@@ -38,6 +40,7 @@ mixin _$Receipt {
   Category get category;
   double get price;
   DateTime get date;
+  bool get isFavorite;
 
   @JsonKey(ignore: true)
   $ReceiptCopyWith<Receipt> get copyWith;
@@ -47,7 +50,12 @@ mixin _$Receipt {
 abstract class $ReceiptCopyWith<$Res> {
   factory $ReceiptCopyWith(Receipt value, $Res Function(Receipt) then) =
       _$ReceiptCopyWithImpl<$Res>;
-  $Res call({String id, Category category, double price, DateTime date});
+  $Res call(
+      {String id,
+      Category category,
+      double price,
+      DateTime date,
+      bool isFavorite});
 }
 
 /// @nodoc
@@ -64,12 +72,15 @@ class _$ReceiptCopyWithImpl<$Res> implements $ReceiptCopyWith<$Res> {
     Object category = freezed,
     Object price = freezed,
     Object date = freezed,
+    Object isFavorite = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as String,
       category: category == freezed ? _value.category : category as Category,
       price: price == freezed ? _value.price : price as double,
       date: date == freezed ? _value.date : date as DateTime,
+      isFavorite:
+          isFavorite == freezed ? _value.isFavorite : isFavorite as bool,
     ));
   }
 }
@@ -79,7 +90,12 @@ abstract class _$ReceiptCopyWith<$Res> implements $ReceiptCopyWith<$Res> {
   factory _$ReceiptCopyWith(_Receipt value, $Res Function(_Receipt) then) =
       __$ReceiptCopyWithImpl<$Res>;
   @override
-  $Res call({String id, Category category, double price, DateTime date});
+  $Res call(
+      {String id,
+      Category category,
+      double price,
+      DateTime date,
+      bool isFavorite});
 }
 
 /// @nodoc
@@ -97,12 +113,15 @@ class __$ReceiptCopyWithImpl<$Res> extends _$ReceiptCopyWithImpl<$Res>
     Object category = freezed,
     Object price = freezed,
     Object date = freezed,
+    Object isFavorite = freezed,
   }) {
     return _then(_Receipt(
       id: id == freezed ? _value.id : id as String,
       category: category == freezed ? _value.category : category as Category,
       price: price == freezed ? _value.price : price as double,
       date: date == freezed ? _value.date : date as DateTime,
+      isFavorite:
+          isFavorite == freezed ? _value.isFavorite : isFavorite as bool,
     ));
   }
 }
@@ -113,11 +132,13 @@ class _$_Receipt extends _Receipt {
       {@required this.id,
       @required this.category,
       @required this.price,
-      @required this.date})
+      @required this.date,
+      @required this.isFavorite})
       : assert(id != null),
         assert(category != null),
         assert(price != null),
         assert(date != null),
+        assert(isFavorite != null),
         super._();
 
   @override
@@ -128,10 +149,12 @@ class _$_Receipt extends _Receipt {
   final double price;
   @override
   final DateTime date;
+  @override
+  final bool isFavorite;
 
   @override
   String toString() {
-    return 'Receipt(id: $id, category: $category, price: $price, date: $date)';
+    return 'Receipt(id: $id, category: $category, price: $price, date: $date, isFavorite: $isFavorite)';
   }
 
   @override
@@ -146,7 +169,10 @@ class _$_Receipt extends _Receipt {
             (identical(other.price, price) ||
                 const DeepCollectionEquality().equals(other.price, price)) &&
             (identical(other.date, date) ||
-                const DeepCollectionEquality().equals(other.date, date)));
+                const DeepCollectionEquality().equals(other.date, date)) &&
+            (identical(other.isFavorite, isFavorite) ||
+                const DeepCollectionEquality()
+                    .equals(other.isFavorite, isFavorite)));
   }
 
   @override
@@ -155,7 +181,8 @@ class _$_Receipt extends _Receipt {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(category) ^
       const DeepCollectionEquality().hash(price) ^
-      const DeepCollectionEquality().hash(date);
+      const DeepCollectionEquality().hash(date) ^
+      const DeepCollectionEquality().hash(isFavorite);
 
   @JsonKey(ignore: true)
   @override
@@ -169,7 +196,8 @@ abstract class _Receipt extends Receipt {
       {@required String id,
       @required Category category,
       @required double price,
-      @required DateTime date}) = _$_Receipt;
+      @required DateTime date,
+      @required bool isFavorite}) = _$_Receipt;
 
   @override
   String get id;
@@ -179,6 +207,8 @@ abstract class _Receipt extends Receipt {
   double get price;
   @override
   DateTime get date;
+  @override
+  bool get isFavorite;
   @override
   @JsonKey(ignore: true)
   _$ReceiptCopyWith<_Receipt> get copyWith;
